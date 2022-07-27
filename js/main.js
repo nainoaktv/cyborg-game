@@ -6,8 +6,8 @@ import { InputHandler } from './input.js';
 window.addEventListener('load', function() {
   const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext('2d');
-  canvas.width = 400;
-  canvas.height = 300;
+  canvas.width = 800;
+  canvas.height = 600;
 
   // ============= All logic will be in Game class ================= //
   class Game {

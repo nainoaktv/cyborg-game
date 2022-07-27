@@ -1,15 +1,15 @@
 export class Player {
   constructor(game) {
     this.game = game;
-    this.width = 35;
-    this.height = 48;
+    this.width = 140;
+    this.height = 144;
     this.x = 0;
     this.y = this.game.height - this.height;
     this.vy = 0;
     this.weight = 1;
     this.image = document.getElementById('player')
     this.speed = 0;
-    this.maxSpeed = 1.5;
+    this.maxSpeed = 2;
   }
   update(input) {
     // ==== Horizontal Movement ==== //
