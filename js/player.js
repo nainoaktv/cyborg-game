@@ -14,7 +14,7 @@ export class Player {
     this.speed = 0;
     this.maxSpeed = 2;
     this.maxFrame; // Used to smoothly cycle through frames on X for playerState
-    this.fps = 12;
+    this.fps = 20;
     this.frameInterval = 1000/this.fps;
     this.frameTimer = 0;
     this.states = [new Idle(this), new Running(this), new Jump(this)];
