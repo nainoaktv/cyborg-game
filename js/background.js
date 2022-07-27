@@ -25,7 +25,7 @@ export class Background {
     this.width = 1667;
     this.height = 500;
     this.backgroundImage = document.getElementById('background')
-    this.layer1 = new Layer(this.game, this.width, this.height, 1, this.backgroundImage);
+    this.layer1 = new Layer(this.game, this.width, this.height, 0.6, this.backgroundImage);
     this.backgroundLayer = [this.layer1];
   }
   update() {
