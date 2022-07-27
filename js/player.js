@@ -1,17 +1,24 @@
+import { Idle, Running } from './playerState.js';
 export class Player {
   constructor(game) {
     this.game = game;
     this.width = 140;
-    this.height = 144;
+    this.height = 150;
     this.x = 0;
     this.y = this.game.height - this.height;
     this.vy = 0;
     this.weight = 1;
     this.image = document.getElementById('player')
+    this.frameX = 0;
+    this.frameY = 0;
     this.speed = 0;
     this.maxSpeed = 2;
+    this.states = [new Idle(this), new Running(this)];
+    this.currentState = this.states[0];
+    this.currentState.enter();
   }
   update(input) {
+    this.currentState.handleInput(input);
     // ==== Horizontal Movement ==== //
     this.x += this.speed;
     if (input.includes('ArrowRight'))  this.speed = this.maxSpeed;
@@ -30,10 +37,14 @@ export class Player {
     else this.vy=0;
   }
   draw(context) {
-    context.drawImage(this.image, 0, 0, this.width, this.height, this.x, this.y, 
-      this.width, this.height);
+    context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height,
+       this.x, this.y, this.width, this.height);
   }
   onGround() {
     return this.y >= this.game.height -this.height;
+  }
+  setState(state) {
+    this.currentState = this.states[state];
+    this.currentState.enter();
   }
 };
