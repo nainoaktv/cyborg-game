@@ -1,8 +1,8 @@
 // === Creating States when using multiple inputs === //
 const states = {
-  Idle: 0,
-  Running: 1,
-  Jump: 2,
+  idle: 0,
+  running: 1,
+  jump: 2,
 }
 
 class State {
@@ -14,15 +14,18 @@ class State {
 // === Transitioning between states with inputs === //
 export class Idle extends State {
   constructor(player) {
-    super('Idle');
+    super('idle');
     this.player = player;
   }
   enter() {
     this.player.frameY = 0;
+    this.player.maxFrame = 5;
   }
   handleInput(input) {
     if (input.includes('ArrowLeft') || input.includes('ArrowRight')) {
-      this.player.setState(states.Running);
+      this.player.setState(states.running);
+    } else if (input.includes('ArrowUp')) {
+      this.player.setState(states.jump);
     }
   }
 }
@@ -33,12 +36,34 @@ export class Running extends State {
   }
   enter() {
     this.player.frameY = 1;
+    this.player.maxFrame = 6;
   }
   handleInput(input) {
     if (input.includes('ArrowDown')) {
-      this.player.setState(states.Idle);
+      this.player.setState(states.idle);
+    } else if (input.includes('ArrowUp')) {
+      this.player.setState(states.jump);
+    } 
+  }
+}
+export class Jump extends State {
+  constructor(player) {
+    super('jump');
+    this.player = player;
+  }
+  enter() {
+    if (this.player.onGround()) this.player.vy -= 25;
+    this.player.frameY = 2;
+    this.player.maxFrame = 0;
+  }
+  handleInput(input) {
+    if (this.player.vy > this.player.weight) {
+      this.player.setState(states.idle);
+    } else if (input.includes('ArrowUp')) {
+      this.player.setState(states.jump);
     }
   }
 }
+
 
 

@@ -8,10 +8,6 @@ export class InputHandler {
             e.key === 'ArrowUp' ||
             e.key === 'ArrowRight' ||
             e.key === 'ArrowLeft' ||
-            e.key === 's' || 
-            e.key === 'w' ||
-            e.key === 'd' ||
-            e.key === 'a' ||
             e.key === 'Shift' 
           ) && this.keys.indexOf(e.key) === -1) {
         this.keys.push(e.key);
@@ -24,10 +20,6 @@ export class InputHandler {
             e.key === 'ArrowUp' ||
             e.key === 'ArrowRight' ||
             e.key === 'ArrowLeft' ||
-            e.key === 's' || 
-            e.key === 'w' ||
-            e.key === 'd' ||
-            e.key === 'a' ||
             e.key === 'Shift') {
             this.keys.splice(this.keys.indexOf(e.key), 1);
       }
