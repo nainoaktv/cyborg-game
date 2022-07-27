@@ -24,7 +24,7 @@ export class Player {
     // === Prevent Player from moving out of canvas RIGHT side ==== //
     if (this.x > this.game.width - this.width) this.x = this.game.width - this.width;
     // ==== Jump/Vertical Movement by adding weight to vy === //
-    if (input.includes('ArrowUp') && this.onGround()) this.vy -= 20;
+    if (input.includes('ArrowUp') && this.onGround()) this.vy -= 25;
     this.y += this.vy;
     if(!this.onGround()) this.vy += this.weight;
     else this.vy=0;
