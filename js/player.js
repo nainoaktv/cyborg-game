@@ -12,7 +12,7 @@ export class Player {
     this.frameX = 0;
     this.frameY = 0;
     this.speed = 0;
-    this.maxSpeed = 2;
+    this.maxSpeed = 3;
     this.maxFrame; // Used to smoothly cycle through frames on X for playerState
     this.fps = 20;
     this.frameInterval = 1000/this.fps;
@@ -23,20 +23,25 @@ export class Player {
   }
   update(input, deltaTime) {
     this.currentState.handleInput(input);
+    
     // ==== Horizontal Movement ==== //
     this.x += this.speed;
     if (input.includes('ArrowRight'))  this.speed = this.maxSpeed;
     else if (input.includes('ArrowLeft')) this.speed = -this.maxSpeed;
     else this.speed = 0;
+
     // === Prevent Player from moving out of canvas LEFT side ==== //
     if (this.x < 0) this.x = 0;
+
     // === Prevent Player from moving out of canvas RIGHT side ==== //
     if (this.x > this.game.width - this.width) this.x = this.game.width - this.width;
+
     // ==== Jump/Vertical Movement by adding weight to vy === //
     // if (input.includes('ArrowUp') && this.onGround()) this.vy -= 25;
     this.y += this.vy;
     if(!this.onGround()) this.vy += this.weight;
     else this.vy=0;
+
     // === Sprite Animation === //
     if (this.frameTimer > this.frameInterval) {
       this.frameTimer = 0;

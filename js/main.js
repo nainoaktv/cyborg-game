@@ -7,7 +7,7 @@ import { Background } from './background.js';
 window.addEventListener('load', function() {
   const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext('2d');
-  canvas.width = 800;
+  canvas.width = 900;
   canvas.height = 600;
 
   // ============= All logic will be in Game class ================= //
