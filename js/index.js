@@ -1,12 +1,14 @@
+// === Global Variables === //
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
+const enemyCounter = document.querySelector('#enemy-number');
+const livesCounter = document.querySelector('#lives-number');
 
 canvas.width = 1024;
 canvas.height = 576;
 
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-// === Global Variables === //
 const gravity = 0.7; // Pulls player to bottom of canvas
 
 
@@ -184,7 +186,8 @@ function animate() {
     player.isAttacking
   ) {
     player.isAttacking = false;
-    console.log('hit');
+    let newCount = Number(enemyCounter.textContent) - 1;
+    enemyCounter.textContent = newCount;
   }
 
   if (

@@ -2,25 +2,40 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
   background-color: grey;
 }
 
 
-#Pri-container {
+#pri-container {
   position: relative;
+  display: inline-block;
 }
 
+#sec-container {
+  position: absolute;
+  display: flex;
+  padding: 20px;
+  width: 100%;
+}
 
 #lives-counter {
-  background-color: yellow;
+  position: absolute;
+  /* background-color: yellow; */
+  color: white;
   height: 30px;
   width: 100px;
+  top: 10px;
 }
 
 #enemy-counter {
   position: absolute;
-  background-color: red;
+  /* background-color: red; */
+  color: white;
   height: 30px;
   width: 100px;
-  right: 0;
+  right: 20px;
+  top: 10px;
 }
