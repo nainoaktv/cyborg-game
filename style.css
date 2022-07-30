@@ -5,14 +5,22 @@
   background-color: grey;
 }
 
-#canvas1 {
-  /* border: 5px solid black; */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 100%;
-  max-height: 100%;
-  
+
+#Pri-container {
+  position: relative;
 }
 
+
+#lives-counter {
+  background-color: yellow;
+  height: 30px;
+  width: 100px;
+}
+
+#enemy-counter {
+  position: absolute;
+  background-color: red;
+  height: 30px;
+  width: 100px;
+  right: 0;
+}
