@@ -11,9 +11,11 @@ const gravity = 0.7; // Pulls player to bottom of canvas
 
 
 // === Create Sprite class to help define player and enemy properties === //
-/* + draw() method will be called to fill Sprite context and Attack Box 
-+ update() method will be called to define Sprite position and gravity to prevent characters from falling
-below the canvas. */
+/* 
+- draw() method will be called to fill Sprite context and Attack Box 
+- update() method will be called to define Sprite position and gravity to prevent characters from falling
+below the canvas.
+- attack() method to prevent constant hit detection until key is pressed */
 class Sprite {
   constructor({ position, velocity, color = 'red' }) {
     this.position = position;
@@ -33,9 +35,16 @@ class Sprite {
     ctx.fillStyle = this.color;
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
-    // Attack Box
+    /* Attack Box 
+    - if() loop so that if player isAttacking then collision will be detected */
+    if (this.isAttacking) {
     ctx.fillStyle = 'green';
-    ctx.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
+    ctx.fillRect(
+      this.attackBox.position.x, 
+      this.attackBox.position.y, 
+      this.attackBox.width, 
+      this.attackBox.height)
+    }
   }
   update() {
     this.draw();
@@ -48,6 +57,14 @@ class Sprite {
     } else {
       this.velocity.y += gravity;
     }
+  }
+  
+  // === Attacking Method === //
+  attack() {
+    this.isAttacking = true;
+    setTimeout(() => {
+      this.isAttacking = false;
+    }, 100);
   }
 }
 
@@ -135,6 +152,7 @@ function animate() {
     player.attackBox.position.y + player.attackBox.height >= enemy.position.y &&
     player.attackBox.position.y <= enemy.position.y + enemy.height &&
     player.isAttacking) {
+      player.isAttacking = false;
     console.log('hit');
   }
 
@@ -168,6 +186,9 @@ window.addEventListener('keydown', (event) => {
       break;
     case 'ArrowUp':
       player.velocity.y = -20;
+      break;
+    case ' ':
+      player.attack();
       break;
   }
 });
