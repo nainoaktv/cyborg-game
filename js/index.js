@@ -18,6 +18,7 @@ class Sprite {
   constructor({ position, velocity, color = 'red' }) {
     this.position = position;
     this.velocity = velocity;
+    this.width = 50;
     this.height = 150;
     this.lastKey
     this.attackBox = {
@@ -26,10 +27,11 @@ class Sprite {
       height: 50,
     }
     this.color = color;
+    this.isAttacking;
   }
   draw() {
     ctx.fillStyle = this.color;
-    ctx.fillRect(this.position.x, this.position.y, 50, this.height);
+    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
     // Attack Box
     ctx.fillStyle = 'green';
@@ -49,7 +51,7 @@ class Sprite {
   }
 }
 
-// === Start player object === //
+// === Player object to be given its own properties === //
 const player = new Sprite({
   position: {
   x: 0,
@@ -61,7 +63,7 @@ velocity: {
 }
 });
 
-// === Start Enemy Object === //
+// === Enemy Object to be given its own properties === //
 const enemy = new Sprite({
   position: {
   x: 400,
@@ -96,7 +98,12 @@ const keys = {
   }
 }
 
-// === Animation Loop === //
+/* Animation Loop 
+- fill canvas context 
+- update enemy and player using method 
+- Default player Velocity
+- if loops to allow multiple key presses and reads last key input 
+- Detect collision */
 function animate() {
   window.requestAnimationFrame(animate);
   ctx.fillStyle = 'black';
@@ -120,6 +127,17 @@ function animate() {
   } else if (keys.ArrowRight.pressed && player.lastKey === 'ArrowRight') {
     player.velocity.x = 5;
   }
+
+  // === Collision Detection === //
+  if (
+    player.attackBox.position.x + player.attackBox.width >= enemy.position.x && 
+    player.attackBox.position.x <= enemy.position.x + enemy.width &&
+    player.attackBox.position.y + player.attackBox.height >= enemy.position.y &&
+    player.attackBox.position.y <= enemy.position.y + enemy.height &&
+    player.isAttacking) {
+    console.log('hit');
+  }
+
 }
 
 animate();
