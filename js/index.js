@@ -137,13 +137,7 @@ const keys = {
   }
 };
 
-/* Animation Loop 
-- fill canvas context 
-- update enemy and player using method 
-- Default player Velocity
-- if loops to allow multiple key presses and reads last key input 
-- Detect collision
-- Refactor collision code to look cleaner */
+// === FUNCTIONS AND ANIMATION LOOP START === //
 function rectangularCollision({ rectangle1, rectangle2 }) {
   return (
     rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x && 
@@ -160,7 +154,7 @@ function animate() {
   player.update();
   enemy.update();
 
-  // === Default player Velocity to 0 === //
+  // Default player Velocity to 0
   player.velocity.x = 0;
   
   // Movement with WASD
@@ -177,7 +171,7 @@ function animate() {
     player.velocity.x = 5;
   };
 
-  // === Collision Detection === //
+  // Collision Detection 
   if (
     rectangularCollision({
       rectangle1: player,
@@ -188,7 +182,8 @@ function animate() {
     player.isAttacking = false;
     let newCount = Number(enemyCounter.textContent) - 1;
     enemyCounter.textContent = newCount;
-  }
+    if (newCount === 0) console.log('Wave Cleared');
+  } 
 
   if (
     rectangularCollision({
@@ -198,14 +193,25 @@ function animate() {
     enemy.isAttacking
   ) {
     enemy.isAttacking = false;
-    console.log('damage taken');
+    let newLives = Number(livesCounter.textContent) - 1;
+    livesCounter.textContent = newLives;
+    if(newLives === 0) console.log('Player Died');
   }
 
 }
 
 animate();
 
-// === Event Listeners to move player === //
+//  Player Death & Wave Cleared function
+function playerDeath() {
+  if (enemyCounter.textContent === Number(0)) {
+    console.log('Wave Cleared');
+  }
+}
+
+// === FUNCTIONS END === //
+
+// === EVENT LISTENERS START === //
 
 // Keydown
 window.addEventListener('keydown', (event) => {
@@ -261,4 +267,4 @@ window.addEventListener('keyup', (event) => {
       break;
   }
 });
-
+// === EVENT LISTENERS END === //

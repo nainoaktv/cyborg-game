@@ -27,6 +27,7 @@ body {
   color: white;
   height: 30px;
   width: 100px;
+  left: 50px;
   top: 10px;
 }
 
@@ -36,6 +37,6 @@ body {
   color: white;
   height: 30px;
   width: 100px;
-  right: 20px;
+  right: 0px;
   top: 10px;
 }
