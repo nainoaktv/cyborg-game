@@ -11,76 +11,15 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 const gravity = 0.7; // Pulls player to bottom of canvas
 
-
-// === Create Sprite class to help define player and enemy properties === //
-/* 
-- draw() method will be called to fill Sprite context and Attack Box 
-- update() method will be called to define Sprite position and gravity to prevent characters from falling
-below the canvas.
-- attack() method to prevent constant hit detection until key is pressed */
-class Sprite {
-  constructor({ position, velocity, color = 'red', offset }) {
-    this.position = position;
-    this.velocity = velocity;
-    this.width = 50;
-    this.height = 150;
-    this.lastKey
-    this.attackBox = {
-      position: {
-        x: this.position.x,
-        y: this.position.y
-      },
-
-      offset,
-
-      width: 100,
-      height: 50
-    }
-    this.color = color;
-    this.isAttacking;
-  }
-  draw() {
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-
-    /* Attack Box 
-    - if() loop so that if player isAttacking then collision box will appear on keypress */
-    if (this.isAttacking) {
-    ctx.fillStyle = 'green';
-    ctx.fillRect(
-      this.attackBox.position.x, 
-      this.attackBox.position.y, 
-      this.attackBox.width, 
-      this.attackBox.height)
-    }
-  }
-  update() {
-    this.draw();
-    this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
-    this.attackBox.position.y = this.position.y;
-
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y;
-
-    // if() velocity loop to stop player and enemy from falling below canvas === //
-    if (this.position.y + this.height + this. velocity.y >= canvas.height) {
-      this.velocity.y = 0;
-    } else {
-      this.velocity.y += gravity;
-    }
-  }
-  
-  // === Attacking Method === //
-  attack() {
-    this.isAttacking = true;
-    setTimeout(() => {
-      this.isAttacking = false;
-    }, 100);
-  }
-}
-
+const background = new Sprite({
+  position: {
+    x: 0,
+    y: 0
+  },
+  imageSrc: './assets/background/bigstreet.png'
+});
 // === Player object to be given its own properties === //
-const player = new Sprite({
+const player = new Player({
   position: {
   x: 0,
   y: 0
@@ -96,7 +35,7 @@ offset: {
 });
 
 // === Enemy Object to be given its own properties === //
-const enemy = new Sprite({
+const enemy = new Player({
   position: {
   x: 400,
   y: 100
@@ -112,7 +51,8 @@ offset: {
 color: 'blue'
 });
 
-// === Keys Object to control game === //
+
+// === Keys Object to defaulted to false === //
 const keys = {
   a: {
     pressed: false
@@ -137,20 +77,14 @@ const keys = {
   }
 };
 
-// === FUNCTIONS AND ANIMATION LOOP START === //
-function rectangularCollision({ rectangle1, rectangle2 }) {
-  return (
-    rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x && 
-    rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width &&
-    rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y &&
-    rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height
-  );
-};
+
+// === ANIMATION LOOP START === //
 
 function animate() {
   window.requestAnimationFrame(animate);
   ctx.fillStyle = 'black';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  background.update();
   player.update();
   enemy.update();
 
@@ -182,7 +116,7 @@ function animate() {
     player.isAttacking = false;
     let newCount = Number(enemyCounter.textContent) - 1;
     enemyCounter.textContent = newCount;
-    if (newCount === 0) console.log('Wave Cleared');
+    if (newCount === 0) alert('Wave Cleared');
   } 
 
   if (
@@ -195,24 +129,17 @@ function animate() {
     enemy.isAttacking = false;
     let newLives = Number(livesCounter.textContent) - 1;
     livesCounter.textContent = newLives;
-    if(newLives === 0) console.log('Player Died');
+    if(newLives === 0) alert('Game Over');
   }
 
 }
 
 animate();
+// === ANIMATION LOOP END === //
 
-//  Player Death & Wave Cleared function
-function playerDeath() {
-  if (enemyCounter.textContent === Number(0)) {
-    console.log('Wave Cleared');
-  }
-}
 
-// === FUNCTIONS END === //
 
 // === EVENT LISTENERS START === //
-
 // Keydown
 window.addEventListener('keydown', (event) => {
   switch (event.key) {
@@ -268,3 +195,5 @@ window.addEventListener('keyup', (event) => {
   }
 });
 // === EVENT LISTENERS END === //
+
+
