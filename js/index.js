@@ -9,7 +9,7 @@ canvas.height = 576;
 
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-const gravity = .5; // Pulls player to bottom of canvas
+const gravity = .7; // Pulls player to bottom of canvas
 
 const background = new Sprite({
   position: {
@@ -56,7 +56,11 @@ sprites: {
   fall: {
     imageSrc: './assets/character/Fall.png',
     framesMax: 2,
-  }
+  },
+  attack1: {
+    imageSrc: './assets/character/Attack1.png',
+    framesMax: 6,
+  },
 }
 
 });
