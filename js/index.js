@@ -18,6 +18,7 @@ const background = new Sprite({
   },
   imageSrc: './assets/background/bigstreet.png'
 });
+
 // === Player object to be given its own properties === //
 const player = new Player({
   position: {
@@ -26,12 +27,34 @@ const player = new Player({
 },
 velocity: {
   x: 0,
-  y: 10
+  y: 0
 },
 offset: {
   x: 0,
   y: 0
+},
+imageSrc: './assets/character/Idle.png',
+framesMax: 8,
+scale: 2.5,
+offset: {
+  x: 215,
+  y: 180
+},
+sprites: {
+  idle: {
+    imageSrc: './assets/character/Idle.png',
+    framesMax: 8,
+  },
+  run: {
+    imageSrc: './assets/character/Run.png',
+    framesMax: 8,
+  },
+  jump: {
+    imageSrc: './assets/character/Jump.png',
+    framesMax: 2,
+  }
 }
+
 });
 
 // === Enemy Object to be given its own properties === //
@@ -86,24 +109,32 @@ function animate() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   background.update();
   player.update();
-  enemy.update();
+  // enemy.update();
 
   // Default player Velocity to 0
   player.velocity.x = 0;
   
-  // Movement with WASD
-  if (keys.a.pressed && player.lastKey === 'a') {
+  // Movement with WASD and Arrows
+  if (
+    keys.a.pressed && player.lastKey === 'a' ||
+    keys.ArrowLeft.pressed && player.lastKey === 'ArrowLeft'
+    ) {
     player.velocity.x = -5;
-  } else if (keys.d.pressed && player.lastKey === 'd') {
+    player.switchSprite('run');
+  } else if (
+    keys.d.pressed && player.lastKey === 'd' || 
+    keys.ArrowRight.pressed && player.lastKey === 'ArrowRight'
+    ) {
     player.velocity.x = 5;
+    player.switchSprite('run');
+  } else {
+    player.switchSprite('idle');
   };
 
-  // Movement with Arrow Keys
-  if (keys.ArrowLeft.pressed && player.lastKey === 'ArrowLeft') {
-    player.velocity.x = -5;
-  } else if (keys.ArrowRight.pressed && player.lastKey === 'ArrowRight') {
-    player.velocity.x = 5;
-  };
+  // Jump Sprite Switch
+  if (player.velocity.y < 0) {
+    player.switchSprite('jump');
+  }
 
   // Collision Detection 
   if (

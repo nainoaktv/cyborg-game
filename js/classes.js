@@ -7,7 +7,13 @@ below the canvas.
 - attack() method to prevent constant hit detection until key is pressed */
 
 class Sprite {
-  constructor({ position, imageSrc, scale = 1, framesMax = 1 }) {
+  constructor({ 
+    position, 
+    imageSrc, 
+    scale = 1, 
+    framesMax = 1, 
+    offset = {x: 0, y: 0} 
+    }) {
     this.position = position;
     this.width = 50;
     this.height = 150;
@@ -17,7 +23,8 @@ class Sprite {
     this.framesMax = framesMax;
     this.framesCurrent = 0;
     this.framesElapsed = 0;
-    this.framesHold = 1;
+    this.framesHold = 5;
+    this.offset = offset;
   };
   draw() {
     ctx.drawImage(
@@ -26,14 +33,14 @@ class Sprite {
       0,
       this.image.width / this.framesMax,
       this.image.height,
-      this.position.x, 
-      this.position.y, 
+      this.position.x - this.offset.x, 
+      this.position.y - this.offset.y, 
       (this.image.width / this.framesMax) * this.scale, 
       this.image.height * this.scale
       );
   };
-  update() {
-    this.draw();
+
+  animateFrames() {
     this.framesElapsed++;
 
     if (this.framesElapsed % this.framesHold === 0) {
@@ -42,15 +49,36 @@ class Sprite {
       } else {
         this.framesCurrent = 0;
       }
-    }
-      
+    };
+  }
+
+  update() {
+    this.draw();
+    this.animateFrames();
   };
 };
 
 
-class Player {
-  constructor({ position, velocity, color = 'red', offset }) {
-    this.position = position;
+class Player extends Sprite {
+  constructor({ 
+    position, 
+    velocity, 
+    color = 'red', 
+    imageSrc,
+    scale = 1,
+    framesMax = 1,
+    offset = {x: 0, y: 0},
+    sprites
+    }) {
+      
+    super({
+      position, 
+      imageSrc,
+      scale,
+      framesMax,
+      offset
+    })
+
     this.velocity = velocity;
     this.width = 50;
     this.height = 150;
@@ -62,30 +90,26 @@ class Player {
       },
 
       offset,
-
       width: 100,
       height: 50
     }
+
     this.color = color;
     this.isAttacking;
-  };
-  draw() {
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    this.framesCurrent = 0;
+    this.framesElapsed = 0;
+    this.framesHold = 5;
+    this.sprites = sprites;
 
-    /* Attack Box 
-    - if() loop so that if player isAttacking then collision box will appear on keypress */
-    if (this.isAttacking) {
-    ctx.fillStyle = 'green';
-    ctx.fillRect(
-      this.attackBox.position.x, 
-      this.attackBox.position.y, 
-      this.attackBox.width, 
-      this.attackBox.height)
+    for (const sprite in sprites) {
+      sprites[sprite].image = new Image();
+      sprites[sprite].image.src = sprites[sprite].imageSrc;
     }
   };
+ 
   update() {
     this.draw();
+    this.animateFrames();
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y;
 
@@ -107,4 +131,30 @@ class Player {
       this.isAttacking = false;
     }, 100);
   };
+
+  switchSprite(sprite) {
+    switch (sprite) {
+      case 'idle':
+        if (this.image !== this.sprites.idle.image) {
+          this.image = this.sprites.idle.image;
+          this.framesMax = this.sprites.idle.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
+      case 'run':
+        if (this.image !== this.sprites.run.image) {
+          this.image = this.sprites.run.image;
+          this.framesMax = this.sprites.run.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
+      case 'jump':
+        if (this.image !== this.sprites.jump.image) {
+          this.image = this.sprites.jump.image;
+          this.framesMax = this.sprites.jump.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
+    }
+  }
 };

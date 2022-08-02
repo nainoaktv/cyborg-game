@@ -8,6 +8,14 @@ body {
   background-color: grey;
 }
 
+#background {
+  display: none;
+}
+
+#player {
+  display: none;
+}
+
 #pri-container {
   position: relative;
   display: inline-block;

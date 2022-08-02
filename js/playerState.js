@@ -31,7 +31,7 @@ export class Idle extends State {
 }
 export class Running extends State {
   constructor(player) {
-    super('Running');
+    super('running');
     this.player = player;
   }
   enter() {

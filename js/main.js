@@ -11,6 +11,7 @@ window.addEventListener('load', function() {
   canvas.width = 1024;
   canvas.height = 576;
 
+  const gravity = 0.7;
   // ============= All logic will be in Game class ================= //
   class Game {
     constructor(width, height) {
@@ -35,7 +36,6 @@ window.addEventListener('load', function() {
     }
   }
   const game = new Game(canvas.width, canvas.height);
-  console.log(game);
   let lastTime = 0;
 
   function animate(timeStamp) {
@@ -46,5 +46,5 @@ window.addEventListener('load', function() {
     game.draw(ctx);
     requestAnimationFrame(animate);
   }
-  animate(0); 
+  animate(); 
 });
