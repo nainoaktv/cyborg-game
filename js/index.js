@@ -9,7 +9,7 @@ canvas.height = 576;
 
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-const gravity = 0.7; // Pulls player to bottom of canvas
+const gravity = .5; // Pulls player to bottom of canvas
 
 const background = new Sprite({
   position: {
@@ -51,6 +51,10 @@ sprites: {
   },
   jump: {
     imageSrc: './assets/character/Jump.png',
+    framesMax: 2,
+  },
+  fall: {
+    imageSrc: './assets/character/Fall.png',
     framesMax: 2,
   }
 }
@@ -134,6 +138,8 @@ function animate() {
   // Jump Sprite Switch
   if (player.velocity.y < 0) {
     player.switchSprite('jump');
+  } else if (player.velocity.y > 0) {
+    player.switchSprite('fall');
   }
 
   // Collision Detection 
@@ -148,7 +154,7 @@ function animate() {
     let newCount = Number(enemyCounter.textContent) - 1;
     enemyCounter.textContent = newCount;
     if (newCount === 0) alert('Wave Cleared');
-  } 
+  }; 
 
   if (
     rectangularCollision({
@@ -161,9 +167,9 @@ function animate() {
     let newLives = Number(livesCounter.textContent) - 1;
     livesCounter.textContent = newLives;
     if(newLives === 0) alert('Game Over');
-  }
+  };
 
-}
+};
 
 animate();
 // === ANIMATION LOOP END === //

@@ -119,8 +119,10 @@ class Player extends Sprite {
     // if() velocity loop to stop player and enemy from falling below canvas === //
     if (this.position.y + this.height + this. velocity.y >= canvas.height) {
       this.velocity.y = 0;
+      this.position.y = 426;
     } else {
       this.velocity.y += gravity;
+      console.log(this.position.y)
     }
   };
   
@@ -132,6 +134,7 @@ class Player extends Sprite {
     }, 100);
   };
 
+  // === Switch Sprite PNG method === //
   switchSprite(sprite) {
     switch (sprite) {
       case 'idle':
@@ -155,6 +158,14 @@ class Player extends Sprite {
           this.framesCurrent = 0;
         }
         break;
+      case 'fall':
+        if (this.image !== this.sprites.fall.image) {
+          this.image = this.sprites.fall.image;
+          this.framesMax = this.sprites.fall.framesMax;
+          this.framesCurrent = 0;
+        }
+        break;
+      
     }
   }
 };
