@@ -22,64 +22,72 @@ const background = new Sprite({
 // === Player object to be given its own properties === //
 const player = new Player({
   position: {
-  x: 0,
-  y: 0
-},
-velocity: {
-  x: 0,
-  y: 0
-},
-offset: {
-  x: 0,
-  y: 0
-},
-imageSrc: './assets/character/Idle.png',
-framesMax: 8,
-scale: 2.5,
-offset: {
-  x: 215,
-  y: 180
-},
-sprites: {
-  idle: {
-    imageSrc: './assets/character/Idle.png',
-    framesMax: 8,
+    x: 0,
+    y: 0
   },
-  run: {
-    imageSrc: './assets/character/Run.png',
-    framesMax: 8,
+  velocity: {
+    x: 0,
+    y: 0
   },
-  jump: {
-    imageSrc: './assets/character/Jump.png',
-    framesMax: 2,
+  offset: {
+    x: 0,
+    y: 0
   },
-  fall: {
-    imageSrc: './assets/character/Fall.png',
-    framesMax: 2,
+  imageSrc: './assets/character/Idle.png',
+  framesMax: 8,
+  scale: 2.5,
+  offset: {
+    x: 215,
+    y: 180
   },
-  attack1: {
-    imageSrc: './assets/character/Attack1.png',
-    framesMax: 6,
+  sprites: {
+    idle: {
+      imageSrc: './assets/character/Idle.png',
+      framesMax: 8,
+    },
+    run: {
+      imageSrc: './assets/character/Run.png',
+      framesMax: 8,
+    },
+    jump: {
+      imageSrc: './assets/character/Jump.png',
+      framesMax: 2,
+    },
+    fall: {
+      imageSrc: './assets/character/Fall.png',
+      framesMax: 2,
+    },
+    attack1: {
+      imageSrc: './assets/character/Attack1.png',
+      framesMax: 6,
+    }
   },
-}
-
+    attackBox: {
+      offset: {
+        x: 100,
+        y: 45
+      },
+      width: 160,
+      height: 50
+   }
 });
+
 
 // === Enemy Object to be given its own properties === //
 const enemy = new Player({
   position: {
-  x: 400,
-  y: 100
-},
-velocity: {
-  x: 0,
-  y: 0
-},
-offset: {
-  x: -50,
-  y: 0
-},
-color: 'blue'
+    x: 400,
+   y: 100
+  },
+  velocity: {
+    x: 0,
+    y: 0
+  },
+  offset: {
+    x: -50,
+    y: 0
+  },
+  color: 'blue'
 });
 
 
@@ -152,13 +160,18 @@ function animate() {
       rectangle1: player,
       rectangle2: enemy
     }) &&
-    player.isAttacking
+    player.isAttacking && player.framesCurrent === 4
   ) {
     player.isAttacking = false;
     let newCount = Number(enemyCounter.textContent) - 1;
     enemyCounter.textContent = newCount;
     if (newCount === 0) alert('Wave Cleared');
   }; 
+
+  // Detect missed attack
+  if (player.isAttacking && player.framesCurrent === 4) {
+    player.isAttacking = false;
+  };
 
   if (
     rectangularCollision({
