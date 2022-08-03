@@ -23,9 +23,9 @@ export class Idle extends State {
   }
   handleInput(input) {
     if (input.includes('ArrowLeft') || input.includes('ArrowRight')) {
-      this.player.setState(states.running);
+      this.player.setState(states.running, 1);
     } else if (input.includes('ArrowUp')) {
-      this.player.setState(states.jump);
+      this.player.setState(states.jump, 1);
     }
   }
 }
@@ -40,9 +40,9 @@ export class Running extends State {
   }
   handleInput(input) {
     if (input.includes('ArrowDown')) {
-      this.player.setState(states.idle);
+      this.player.setState(states.idle, 0);
     } else if (input.includes('ArrowUp')) {
-      this.player.setState(states.jump);
+      this.player.setState(states.jump, 1);
     } 
   }
 }
@@ -58,9 +58,9 @@ export class Jump extends State {
   }
   handleInput(input) {
     if (this.player.vy > this.player.weight) {
-      this.player.setState(states.idle);
+      this.player.setState(states.idle, 0);
     } else if (input.includes('ArrowUp')) {
-      this.player.setState(states.jump);
+      this.player.setState(states.jump, 1);
     }
   }
 }

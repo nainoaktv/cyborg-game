@@ -8,31 +8,19 @@
   <title>Cyberpunk Game</title>
 </head>
 <body>
-
-  <!-- Primary Containter -->
-  <div id="pri-container">
+  <canvas id="canvas1"></canvas>
     
-    <!-- Sec Containter -->
-    <div id="sec-container">
-      
-      <!-- Player Lives Counter
-        +Replace Lives Text with HP bar or Heart image -->
-        <div id="lives-counter"><h2 id="lives-number">3</h2></div>
-        
-        <!-- Enemies Remaining
-          Replace text with Enemy image -->
-          <div id="enemy-counter"><h2 id="enemy-number">10</h2></div>
-        </div>
-        <!-- Enter new div to disply wave clear or player death below -->
-        
+    <img id="player" src="./assets/ninja/new-ninja-sheet.png">
+    <!-- <img id="background" src="assets/background/bigstreet.png"> -->
+    <img id="layer1" src="./assets/background/foreground.png">
+    <img id="layer2" src="./assets/background/m.png">
+    <img id="layer3" src="./assets/background/far.png">
+    
 
-    <canvas id="canvas1"></canvas>
   </div>
 
 
-  <script src="./js/untils.js"></script>
-  <script src="./js/classes.js"></script>
-  <script src="./js/index.js"></script>
+  <script type="module" src="./js/main.js"></script>
   
 </body>
 </html>

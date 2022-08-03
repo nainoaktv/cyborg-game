@@ -8,7 +8,6 @@ export class Player {
     this.x = 0;
     this.y = this.game.height - this.height;
     this.vy = 0;
-    this.gravity = 2;
     this.weight = 1;
     this.image = document.getElementById('player')
     this.frameX = 0;
@@ -16,23 +15,13 @@ export class Player {
     this.speed = 0;
     this.maxSpeed = 3;
     this.maxFrame; // Used to smoothly cycle through frames on X for playerState
-    this.fps = 30;
+    this.fps = 20;
     this.frameInterval = 1000/this.fps;
     this.frameTimer = 0;
     this.states = [new Idle(this), new Running(this), new Jump(this)];
     this.currentState = this.states[0];
     this.currentState.enter();
-    this.isAttacking;
-    this.attackBox = {
-      position: {
-        x: this.position.x,
-        y: this.position.y
-      },
-      offset,
-      width: 150,
-      height: 150
-    }
-  }
+  };
   update(input, deltaTime) {
     this.currentState.handleInput(input);
     
@@ -69,19 +58,13 @@ export class Player {
        this.x, this.y, this.width, this.height);
   }
 
-  attack() {
-    this.isAttacking = true;
-    setTimeout(() => {
-      this.isAttacking = false;
-    }, 100);
-  }
-
   onGround() {
     return this.y >= this.game.height -this.height;
   }
 
-  setState(state) {
+  setState(state, speed) {
     this.currentState = this.states[state];
+    this.game.speed = this.game.maxSpeed * speed;
     this.currentState.enter();
   }
 };

@@ -24,9 +24,13 @@ export class Background {
     this.game = game;
     this.width = 1667;
     this.height = 600;
-    this.backgroundImage = document.getElementById('background')
-    this.layer1 = new Layer(this.game, this.width, this.height, 0.6, this.backgroundImage);
-    this.backgroundLayer = [this.layer1];
+    this.layer3img = document.getElementById('layer3');
+    this.layer2img = document.getElementById('layer2');
+    this.layer1img = document.getElementById('layer1');
+    this.layer3 = new Layer(this.game, this.width, this.height, 0.4, this.layer3img);
+    this.layer2 = new Layer(this.game, this.width, this.height, 0.5, this.layer2img);
+    this.layer1 = new Layer(this.game, this.width, this.height, 1, this.layer1img);
+    this.backgroundLayer = [this.layer3, this.layer2, this.layer1];
   }
   update() {
     this.backgroundLayer.forEach(layer => {

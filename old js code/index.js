@@ -74,20 +74,37 @@ const player = new Player({
 
 
 // === Enemy Object to be given its own properties === //
-const enemy = new Player({
+const enemy1 = new Player({
   position: {
     x: 400,
-   y: 100
+    y: 100
   },
   velocity: {
     x: 0,
     y: 0
   },
   offset: {
-    x: -50,
-    y: 0
+    x: -100,
+    y: 250
   },
-  color: 'blue'
+  color: 'blue',
+  imageSrc: './assets/enemy/demon-idle.png',
+  framesMax: 6,
+  sprites: {
+    idle: {
+      imageSrc: './assets/enemy/demon-idle.png',
+      framesMax: 6,
+    }
+  },
+  attackBox: {
+    offset: {
+      x: -100,
+      y: 45
+    },
+    width: 160,
+    height: 50
+ }
+
 });
 
 
@@ -125,7 +142,7 @@ function animate() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   background.update();
   player.update();
-  // enemy.update();
+  enemy1.update();
 
   // Default player Velocity to 0
   player.velocity.x = 0;
@@ -158,7 +175,7 @@ function animate() {
   if (
     rectangularCollision({
       rectangle1: player,
-      rectangle2: enemy
+      rectangle2: enemy1
     }) &&
     player.isAttacking && player.framesCurrent === 4
   ) {
@@ -175,12 +192,12 @@ function animate() {
 
   if (
     rectangularCollision({
-      rectangle1: enemy,
+      rectangle1: enemy1,
       rectangle2: player
     }) &&
-    enemy.isAttacking
+    enemy1.isAttacking
   ) {
-    enemy.isAttacking = false;
+    enemy1.isAttacking = false;
     let newLives = Number(livesCounter.textContent) - 1;
     livesCounter.textContent = newLives;
     if(newLives === 0) alert('Game Over');
@@ -223,7 +240,7 @@ window.addEventListener('keydown', (event) => {
       player.attack();
       break;
     case 'ArrowDown':
-      enemy.isAttacking = true;
+      enemy1.isAttacking = true;
       break;
   }
 });

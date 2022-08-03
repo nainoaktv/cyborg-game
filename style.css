@@ -8,11 +8,7 @@ body {
   background-color: grey;
 }
 
-#background {
-  display: none;
-}
-
-#player {
+#player, #layer1, #layer2, #layer3 {
   display: none;
 }
 

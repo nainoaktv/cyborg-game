@@ -11,13 +11,13 @@ window.addEventListener('load', function() {
   canvas.width = 1024;
   canvas.height = 576;
 
-  const gravity = 0.7;
   // ============= All logic will be in Game class ================= //
   class Game {
     constructor(width, height) {
       this.width = width;
       this.height = height;
-      this.speed = 3;
+      this.speed = 0;
+      this.maxSpeed = 3;
       this.background = new Background(this);
       this.player = new Player(this);
       this.input = new InputHandler();
@@ -46,5 +46,5 @@ window.addEventListener('load', function() {
     game.draw(ctx);
     requestAnimationFrame(animate);
   }
-  animate(); 
+  animate(0); 
 });
