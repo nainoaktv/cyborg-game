@@ -1,6 +1,7 @@
 import { Player } from './player.js';
 import { InputHandler } from './input.js';
 import { Background } from './background.js';
+import { Alien } from './enemy.js';
 // ===== Window Event Listener so code runs when all assets are loaded ====== //
 
 
@@ -8,8 +9,8 @@ window.addEventListener('load', function() {
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   
-  canvas.width = 1024;
-  canvas.height = 576;
+  canvas.width = 800;
+  canvas.height = 720;
 
   // ============= All logic will be in Game class ================= //
   class Game {
@@ -20,21 +21,27 @@ window.addEventListener('load', function() {
       this.maxSpeed = 3;
       this.background = new Background(this);
       this.player = new Player(this);
-      this.input = new InputHandler();
+      this.input = new InputHandler(this);
+      this.alien = new Alien(this);
+      this.debug = true;
     }
     // ===== update() will run for every animation frame and trigger calculations===== //
     update(deltaTime) {
     // === update background and player animation === //
       this.background.update();
       this.player.update(this.input.keys, deltaTime);
+      this.alien.update();
+      console.log(this.alien);
     }
     // ===== draw() method draw images and score ===== //
     draw(context) {
       // === place background behind player === //
       this.background.draw(context); 
       this.player.draw(context);
+      this.alien.draw(context);
     }
-  }
+  };
+  
   const game = new Game(canvas.width, canvas.height);
   let lastTime = 0;
 

@@ -1,6 +1,7 @@
 // =====  KEY INPUT HANDLER ===== //
 export class InputHandler {
-  constructor() {
+  constructor(game) {
+    this.game = game;
     this.keys = []; // this will allow multiple keys to be used at simultaneously
     window.addEventListener('keydown', e => {
       // ===== Once key is pressed it will enter array ===== //
@@ -11,8 +12,7 @@ export class InputHandler {
             e.key === ' ' 
           ) && this.keys.indexOf(e.key) === -1) {
         this.keys.push(e.key);
-      }
-      console.log(e.key, this.keys);
+      } else if (e.key === 'd') this.game.debug = !this.game.debug;
     });
     // ===== When keys are released they will be spliced from array ===== //
     window.addEventListener('keyup', e => {
@@ -22,8 +22,7 @@ export class InputHandler {
             e.key === 'ArrowLeft' ||
             e.key === ' ') {
             this.keys.splice(this.keys.indexOf(e.key), 1);
-      }
-      console.log(e.key, this.keys);
+            }
     });
-  }
-}
+  };
+};

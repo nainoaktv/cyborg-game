@@ -9,11 +9,13 @@ export class Player {
     this.y = this.game.height - this.height;
     this.vy = 0;
     this.weight = 1;
-    this.image = document.getElementById('player')
+    this.image = document.getElementById('player') 
+    // this.image = new Image();
+    // this.image.src = imageSrc;
     this.frameX = 0;
     this.frameY = 0;
     this.speed = 0;
-    this.maxSpeed = 3;
+    this.maxSpeed = 5;
     this.maxFrame; // Used to smoothly cycle through frames on X for playerState
     this.fps = 20;
     this.frameInterval = 1000/this.fps;
@@ -38,10 +40,10 @@ export class Player {
     if (this.x > this.game.width - this.width) this.x = this.game.width - this.width;
 
     // ==== Jump/Vertical Movement by adding weight to vy === //
-    // if (input.includes('ArrowUp') && this.onGround()) this.vy -= 25;
+    if (input.includes('ArrowUp') && this.onGround()) this.vy -= 3;
     this.y += this.vy;
     if(!this.onGround()) this.vy += this.weight;
-    else this.vy=0;
+    else this.vy = 0;
 
     // === Sprite Animation === //
     if (this.frameTimer > this.frameInterval) {
@@ -54,17 +56,18 @@ export class Player {
   };
 
   draw(context) {
+    if (this.game.debug) context.strokeRect(this.x, this.y, this.width, this.height);
     context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height,
        this.x, this.y, this.width, this.height);
-  }
+  };
 
   onGround() {
     return this.y >= this.game.height -this.height;
-  }
+  };
 
   setState(state, speed) {
     this.currentState = this.states[state];
     this.game.speed = this.game.maxSpeed * speed;
     this.currentState.enter();
-  }
+  };
 };

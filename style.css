@@ -8,7 +8,7 @@ body {
   background-color: grey;
 }
 
-#player, #layer1, #layer2, #layer3 {
+#player, #layer1, #layer2, #layer3, #enemy {
   display: none;
 }
 
