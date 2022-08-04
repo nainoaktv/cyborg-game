@@ -27,7 +27,6 @@ window.addEventListener('load', function() {
       this.aliens = [];
       this.alienTimer = 0;
       this.alienInterval = 1000;
-      this.debug = true;
     }
     // ===== update() will run for every animation frame and trigger calculations===== //
     update(deltaTime) {

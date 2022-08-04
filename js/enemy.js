@@ -31,7 +31,6 @@ export class Alien {
     if (this.x + this.width < 0) this.markedForDeletion = true;
   }
   draw(context) {
-    if (this.game.debug) context.strokeRect(this.x, this.y, this.width, this.height);
     context.beginPath();
     context.arc(this.x + this.width / 2, this.y + this.height / 2, this.width /  2, 0, Math.PI * 2);
     // Uncomment to show circle for collision
