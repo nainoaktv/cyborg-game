@@ -11,7 +11,8 @@ window.addEventListener('load', function() {
   
   canvas.width = 800;
   canvas.height = 720;
-
+  
+  // let gameOver = this.player.update;
   // ============= All logic will be in Game class ================= //
   class Game {
     constructor(width, height) {
@@ -23,6 +24,9 @@ window.addEventListener('load', function() {
       this.player = new Player(this);
       this.input = new InputHandler(this);
       this.alien = new Alien(this);
+      this.aliens = [];
+      this.alienTimer = 0;
+      this.alienInterval = 1000;
       this.debug = true;
     }
     // ===== update() will run for every animation frame and trigger calculations===== //
@@ -30,21 +34,37 @@ window.addEventListener('load', function() {
     // === update background and player animation === //
       this.background.update();
       this.player.update(this.input.keys, deltaTime);
-      this.alien.update();
-      console.log(this.alien);
-    }
+      
+      // Alien handler
+      if (this.alienTimer > this.alienInterval) {
+        this.addAlien(game);
+        this.alienTimer = 0;
+      } else {
+        this.alienTimer += deltaTime;
+      }
+      this.aliens.forEach(enemy => {
+        enemy.update(deltaTime);
+        if (enemy.markedForDeletion) this.aliens.splice(this.aliens.indexOf(enemy), 1);
+      });
+    };
     // ===== draw() method draw images and score ===== //
     draw(context) {
       // === place background behind player === //
       this.background.draw(context); 
       this.player.draw(context);
-      this.alien.draw(context);
-    }
+      this.aliens.forEach(enemy => {
+        enemy.draw(context);
+      });
+    };
+    addAlien(){
+      this.aliens.push(new Alien(this));
+      console.log(this.aliens);
+    };
   };
   
   const game = new Game(canvas.width, canvas.height);
   let lastTime = 0;
-
+  
   function animate(timeStamp) {
     const deltaTime = timeStamp - lastTime;
     lastTime = timeStamp;

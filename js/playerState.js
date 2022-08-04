@@ -58,7 +58,7 @@ export class Jump extends State {
   }
   handleInput(input) {
     if (this.player.vy > this.player.weight) {
-      this.player.setState(states.idle, 0);
+      this.player.setState(states.running, 1);
     } else if (input.includes('ArrowUp')) {
       this.player.setState(states.jump, 1);
     }

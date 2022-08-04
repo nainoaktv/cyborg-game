@@ -8,7 +8,11 @@ body {
   background-color: grey;
 }
 
-#player, #layer1, #layer2, #layer3, #enemy {
+#score {
+  position: absolute;
+}
+
+#player, #layer1, #layer2, #layer3, #alien-image {
   display: none;
 }
 
@@ -31,15 +35,19 @@ body {
   height: 30px;
   width: 100px;
   left: 50px;
-  top: 10px;
+  top: 50px;
 }
 
-#enemy-counter {
+h2 {
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+}
+
+#score-counter {
   position: absolute;
   /* background-color: red; */
-  color: white;
   height: 30px;
   width: 100px;
-  right: 0px;
-  top: 10px;
+  left: 30px;
+  top: 50px;
 }
