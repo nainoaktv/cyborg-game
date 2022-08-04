@@ -56,9 +56,9 @@ export class Player {
   };
 
   draw(context) {
-    if (this.game.debug) context.strokeRect(this.x, this.y, this.width, this.height);
-    // context.beginPath();
-    // context.arc(this.x + this.width / 2, this.y + this.height / 2, this.width /  2, 0, Math.PI * 2);
+    context.beginPath();
+    context.arc(this.x + this.width / 2, this.y + this.height / 2, this.width /  2, 0, Math.PI * 2);
+    // Uncomment to show circle collision
     // context.stroke();
     context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height,
        this.x, this.y, this.width, this.height);
