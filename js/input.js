@@ -1,10 +1,12 @@
 // =====  KEY INPUT HANDLER ===== //
+/* 
+- this.keys Array will read take multiple keydown values once pressed
+- keyup will splice values from the array once keys are released */
 export class InputHandler {
   constructor(game) {
     this.game = game;
-    this.keys = []; // this will allow multiple keys to be used at simultaneously
+    this.keys = [];
     window.addEventListener('keydown', e => {
-      // ===== Once key is pressed it will enter array ===== //
       if (( e.key === 'ArrowDown' || 
             e.key === 'ArrowUp' ||
             e.key === 'ArrowRight' ||
@@ -14,7 +16,6 @@ export class InputHandler {
         this.keys.push(e.key);
       } 
     });
-    // ===== When keys are released they will be spliced from array ===== //
     window.addEventListener('keyup', e => {
       if (  e.key === 'ArrowDown' ||
             e.key === 'ArrowUp' ||

@@ -1,4 +1,7 @@
 // === Creating side moving background === //
+/* 
+- Far, Mid, & Foregrund layers will be given speed modifiers
+to create moving background illusion. */
 class Layer {
   constructor(game, width, height, speedModifier, image) {
     this.game = game;
@@ -24,9 +27,9 @@ export class Background {
     this.game = game;
     this.width = 1670;
     this.height = 720;
-    this.layer3img = document.getElementById('layer3');
-    this.layer2img = document.getElementById('layer2');
-    this.layer1img = document.getElementById('layer1');
+    this.layer3img = document.getElementById('layer3'); // Foreground Layer
+    this.layer2img = document.getElementById('layer2'); // Middle Layer
+    this.layer1img = document.getElementById('layer1'); // Far Layer
     this.layer3 = new Layer(this.game, this.width, this.height, 0.4, this.layer3img);
     this.layer2 = new Layer(this.game, this.width, this.height, 0.5, this.layer2img);
     this.layer1 = new Layer(this.game, this.width, this.height, 1, this.layer1img);

@@ -6,27 +6,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
   <title>Cyberpunk Game</title>
 </head>
 <body>
 
   <div id="pri-container">
-
+    
     <div id="sec-container">
-      <h2 id="score-text">SCORE</h2>
-      <h2 id="score-counter">0</h2> 
-
+      <h2 id="score">
+        <span id="score-text">SCORE:</span>
+        <span id="score-counter">0</span>
+      </h2> 
+      
       <img id="player" src="./assets/ninja/new-ninja-sheet.png">
       <img id="alien-image" src="./assets/enemy/alien.png">
       <img id="layer1" src="./assets/background/foreground.png">
       <img id="layer2" src="./assets/background/m.png">
       <img id="layer3" src="./assets/background/far.png">
-
+      
     </div>
-  
-  
+    
     <canvas id="canvas1"></canvas>
   </div>
+  
+  
+  <h2 id="instruction-heading">Instructions</h2>
+  
+  <h3 id="instuctions">
+    1. The Game Already Started!!! <br/><br/>
+    2. Jump over the burgers or it's Game Over! <br/><br/>
+    3. Challenge yourself by attempting to beat your Personal Best! <br/><br/>
+    4.Refresh to play again ᕦ(ò_óˇ)
+  </h3>
+  
+  <h2 id="controls-heading">Controls</h2>
+  
+  <h3 id="controls">
+    Left Arrow = Run Left <br/>
+    Right Arrow = Run Right <br/>
+    Up Arrow = Jump <br/>
+    Down Arrow = Idle Stance
+  </h3>
+  <h2 id="bg-music">Intense Gamer Music</h2>
+  <audio controls src="./assets/music/game-music.mp3" type="audio/mpeg" autoplay loop></audio>
 
 
   <script type="module" src="./js/main.js"></script>

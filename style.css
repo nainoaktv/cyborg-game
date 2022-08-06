@@ -1,15 +1,12 @@
 * {
-  margin: 0;
+  margin: 10px 0 0 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  background-color: grey;
-}
-
-#score {
-  position: absolute;
+  background-color: black;
+  text-align: center;
 }
 
 #player, #layer1, #layer2, #layer3, #alien-image {
@@ -28,26 +25,19 @@ body {
   width: 100%;
 }
 
-#lives-counter {
-  position: absolute;
-  /* background-color: yellow; */
-  color: white;
-  height: 30px;
-  width: 100px;
-  left: 50px;
-  top: 50px;
-}
-
-h2 {
-  font-family: 'Press Start 2P', cursive;
+h2, h3 {
+  font-family: 'Major Mono Display', monospace;
   color: white;
 }
 
-#score-counter {
-  position: absolute;
-  /* background-color: red; */
-  height: 30px;
-  width: 100px;
-  left: 30px;
-  top: 50px;
+h3 {
+  padding: 15px;
+}
+
+#instruction-heading, #controls-heading, #bg-music {
+  text-decoration: underline;
+}
+
+#score {
+  font-size: 30px;
 }
