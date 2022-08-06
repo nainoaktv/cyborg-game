@@ -54,12 +54,11 @@ window.addEventListener('load', function() {
           const score = document.getElementById('score-counter');
           let newScore = Number(score.textContent) + 1;
           score.textContent = newScore;
-        };
+        }
       });
     };
-    // ===== draw() method draw images and score ===== //
+
     draw(context) {
-      // === place background behind player === //
       this.background.draw(context); 
       this.player.draw(context);
       this.aliens.forEach(enemy => {
