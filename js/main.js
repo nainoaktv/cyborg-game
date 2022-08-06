@@ -28,14 +28,13 @@ window.addEventListener('load', function() {
       this.background = new Background(this);
       this.player = new Player(this);
       this.input = new InputHandler(this);
-      this.alien = new Alien(this);
       this.aliens = []; 
       this.alienTimer = 0;
-      this.alienInterval = 1000;
+      this.alienInterval = 1500;
     };
-    // ===== update() will run for every animation frame and trigger calculations===== //
+
     update(deltaTime) {
-    // === update background and player animation === //
+
       this.background.update();
       this.player.update(this.input.keys, deltaTime);
       
@@ -47,6 +46,7 @@ window.addEventListener('load', function() {
         this.alienTimer += deltaTime;
       };
 
+      // Keeping Score for each Alien deleted from array.
       this.aliens.forEach(enemy => {
         enemy.update(deltaTime);
         if (enemy.markedForDeletion) this.aliens.splice(this.aliens.indexOf(enemy), 1);
