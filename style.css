@@ -9,6 +9,10 @@ body {
   text-align: center;
 }
 
+canvas {
+  border: 3px solid white;
+}
+
 #player, #layer1, #layer2, #layer3, #alien-image {
   display: none;
 }
