@@ -156,7 +156,7 @@ export class InputHandler {
 # Future Plans
 ![project1-brainstorm](https://user-images.githubusercontent.com/105531873/181154802-ef6aaebf-3432-4901-8b12-be2acf70ac7d.png)
 I plan to refactor this game to bring my original idea to life.<br/>
-Due to different dimensions for the current Player Sprite PNG I was unable to turn this game into the action game that I wanted. Animations and frames were cutting out causing the game to break entirely. This left me no choice but to change the game entirely.<br/>
+Due to different dimensions for the current Player Sprite PNG I was unable to turn this game into the action game that I wanted. Animations and frames were cutting out causing the game to break entirely. This left me no choice but to change the objective.<br/>
 
 # Credits
 - Music: Closer to Death by [Orhan Yilmaz](https://snapmuse.com/artist/orhan-yilmaz)
