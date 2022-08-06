@@ -152,7 +152,7 @@ export class InputHandler {
 - To utilize multiple keys at once all keydown events were placed into an array.
 - When players stop pressing a key, that key is then spliced from the array.
 # Screenshot
-[hambagu-screenshot](./wireframe/Screen%20Shot%202022-08-06%20at%202.56.37%20AM.png)
+![hambagu-screenshot](./wireframe/Screen%20Shot%202022-08-06%20at%202.56.37%20AM.png)
 # Future Plans
 ![project1-brainstorm](https://user-images.githubusercontent.com/105531873/181154802-ef6aaebf-3432-4901-8b12-be2acf70ac7d.png)
 I plan to refactor this game to bring my original idea to life.<br/>
