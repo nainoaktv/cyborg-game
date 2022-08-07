@@ -56,8 +56,10 @@ export class Player {
 
   draw(context) {
     // Circular Collision Check
+    context.strokeStyle = 'transparent';
     context.beginPath();
-    context.arc(this.x + this.width / 2, this.y + this.height / 2, this.width /  2, 0, Math.PI * 2);
+    context.arc(this.x + this.width / 2, this.y + this.height / 2, this.width / 2, 0, Math.PI * 2);
+    context.stroke();
     context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height,
        this.x, this.y, this.width, this.height);
   };
@@ -74,12 +76,12 @@ export class Player {
 
   collisionDetection() {
     this.game.aliens.forEach(enemy => {
-      const dx = (enemy.x + enemy.width / 2) - (this.x + this.width / 2);
-      const dy = (enemy.y + enemy.height / 2) - (this.y + this.height / 2);
+      const dx = enemy.x - this.x;
+      const dy = enemy.y - this.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < enemy.width / 2 + this.width / 2) {
+      if (distance < enemy.width / 2 + this.width / 3) {
         gameOver = alert('Game Over! Refresh to play again');
-      }; 
+      }
     });
   };
 };
