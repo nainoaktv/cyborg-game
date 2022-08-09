@@ -13,6 +13,32 @@ canvas {
   border: 3px solid white;
 }
 
+#start-game, #game-over {
+  font-family: 'Press Start 2P', cursive;
+  position: absolute;
+  /* background-color: blue; */
+  font-size: 50px;
+  padding: 20px;
+  top: 25%;
+  left: 110px;
+  text-align: center;
+}
+
+#start-game a, #game-over a {
+  position: relative;
+  border: 3px solid white;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.5s;
+}
+
+#start-game a:hover, #game-over a:hover {
+  border-color: cyan;
+}
+
 #player, #layer1, #layer2, #layer3, #alien-image {
   display: none;
 }
