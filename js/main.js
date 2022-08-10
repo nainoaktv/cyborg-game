@@ -30,7 +30,7 @@ window.addEventListener('load', function() {
       this.input = new InputHandler(this);
       this.aliens = []; 
       this.alienTimer = 0;
-      this.alienInterval = 1500;
+      this.alienInterval = 2000;
     };
 
     update(deltaTime) {
@@ -74,13 +74,20 @@ window.addEventListener('load', function() {
   const game = new Game(canvas.width, canvas.height);
   let lastTime = 0;
   
-  function animate(timeStamp) {
-    const deltaTime = timeStamp - lastTime;
-    lastTime = timeStamp;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    game.update(deltaTime);
-    game.draw(ctx);
-    requestAnimationFrame(animate);
-  };
-  animate(0); 
+  window.addEventListener('click', function startGame() {
+    const startDiv = document.getElementById('start-game');
+    const gameOver = document.getElementById('game-over');
+    startDiv.style.display = 'none';
+    canvas.style.display = 'block';
+    gameOver.style.display = 'none';
+    function animate(timeStamp) {
+      const deltaTime = timeStamp - lastTime;
+      lastTime = timeStamp;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      game.update(deltaTime);
+      game.draw(ctx);
+      requestAnimationFrame(animate);
+    };
+    animate(0);
+  });
 });

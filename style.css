@@ -17,11 +17,18 @@ canvas {
   font-family: 'Press Start 2P', cursive;
   position: absolute;
   /* background-color: blue; */
+  display: flex;
   font-size: 50px;
   padding: 20px;
   top: 25%;
   left: 110px;
   text-align: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+#game-over-text {
+  padding: 10px;
 }
 
 #start-game a, #game-over a {

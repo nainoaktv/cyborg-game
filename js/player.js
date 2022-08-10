@@ -75,12 +75,17 @@ export class Player {
   };
 
   collisionDetection() {
+    const startDiv = document.getElementById('start-game');
+    const gameOver = document.getElementById('game-over');
+    const canvas = document.querySelector('canvas');
     this.game.aliens.forEach(enemy => {
       const dx = enemy.x - this.x;
       const dy = enemy.y - this.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
       if (distance < enemy.width / 2 + this.width / 3) {
-        gameOver = alert('Game Over! Refresh to play again');
+        startDiv.style.display = 'none';
+        gameOver.style.display = 'block';
+        window.setTimeout(callback, 1000);
       }
     });
   };
